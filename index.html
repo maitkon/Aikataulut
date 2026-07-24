@@ -31,11 +31,10 @@ body {
 /* Taulukko */
 table.aikataulu {
     width: 100%;
-    max-width: 100%;   /* 🔥 tämä rivi ratkaisee ongelman */
+    max-width: 100%;        /* 🔥 Pakottaa taulukon skaalautumaan */
     border-collapse: collapse;
     margin-bottom: 10px;
 }
-
 
 /* Solujen perusulkoasu */
 .cell {
@@ -43,11 +42,11 @@ table.aikataulu {
     text-align: center;
     height: 32px;
     padding: 6px;
-    width: auto; /* sallii klo/min määrätä leveyden */
+    width: auto;
     font-size: 16px;
 }
 
-/* 1 KLO + 7 MIN solua = 8 solua → 8% per solu */
+/* KLO-solu */
 .klo {
     width: 8%;
     background-color: #025CAE;
@@ -56,6 +55,7 @@ table.aikataulu {
     font-weight: bold;
 }
 
+/* Minuuttisolut */
 .min {
     width: 8%;
     background-color: white;
@@ -98,8 +98,8 @@ table.aikataulu {
     table.aikataulu {
         page-break-inside: avoid;
     }
-
 }
+
 /* MOBIILIVERSIO (kapeat näytöt) */
 @media screen and (max-width: 900px) {
 
@@ -114,7 +114,7 @@ table.aikataulu {
 
     table.aikataulu {
         width: 100% !important;
-        table-layout: fixed !important;
+        table-layout: fixed !important;   /* 🔥 Estää taulukkoa venymästä */
     }
 
     body {
@@ -123,12 +123,12 @@ table.aikataulu {
     }
 
     .main-title {
-        font-size: 22px;
-        padding: 12px;
+        font-size: 24px;
+        padding: 14px;
     }
 
     .section-title {
-        font-size: 20px;
+        font-size: 22px;
         margin-top: 15px;
     }
 
@@ -138,13 +138,13 @@ table.aikataulu {
         display: none;
     }
 
-    /* Jokainen tuntirivi muuttuu kortiksi */
+    /* Jokainen tuntirivi kortiksi */
     table.aikataulu tr {
         display: block;
         border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 10px;
-        margin-bottom: 10px;
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 12px;
         background-color: #f9f9f9;
     }
 
@@ -153,8 +153,8 @@ table.aikataulu {
         display: block;
         width: 100%;
         text-align: left;
-        font-size: 22px; /* isompi */
-        margin-bottom: 6px;
+        font-size: 24px;
+        margin-bottom: 8px;
         background-color: transparent;
         color: #025CAE;
         border-bottom: none;
@@ -165,30 +165,24 @@ table.aikataulu {
     .min {
         display: inline-block;
         width: auto;
-        min-width: 40px;
+        min-width: 45px;
         text-align: center;
-        font-size: 18px; /* isompi */
-        margin-right: 6px;
+        font-size: 20px;
+        margin-right: 8px;
         background-color: white;
         border: 1px solid #ddd;
-        border-radius: 6px;
-        padding: 4px 6px;
+        border-radius: 8px;
+        padding: 6px 8px;
     }
 
-    /* Jos minuutteja on paljon → pienempi mutta silti luettava */
     .min.small-font {
-        font-size: 17px;
+        font-size: 19px;
     }
 
     .min.xsmall-font {
-        font-size: 16px;
+        font-size: 18px;
     }
 }
-
-
-</style>
-</head>
-<body>
 
 <h2 class="main-title">
     18 Pikkupiiankatu (4576) Aikataulut KESÄ (1.6.–4.8.2026)
