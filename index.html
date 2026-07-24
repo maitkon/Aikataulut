@@ -31,9 +31,11 @@ body {
 /* Taulukko */
 table.aikataulu {
     width: 100%;
+    max-width: 100%;   /* 🔥 tämä rivi ratkaisee ongelman */
     border-collapse: collapse;
     margin-bottom: 10px;
 }
+
 
 /* Solujen perusulkoasu */
 .cell {
@@ -100,13 +102,24 @@ table.aikataulu {
 }
 /* MOBIILIVERSIO (kapeat näytöt) */
 @media screen and (max-width: 900px) {
-table.aikataulu {
-    width: 100% !important;
-}
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        max-width: 100% !important;
+        overflow-x: hidden;
+    }
+
+    table.aikataulu {
+        width: 100% !important;
+        table-layout: fixed !important;
+    }
 
     body {
         margin: 10px;
-        font-size: 18px; /* yleisfontti isommaksi */
+        font-size: 18px;
     }
 
     .main-title {
