@@ -1,0 +1,208 @@
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linja-aikataulu</title>
+
+<style>
+:root {
+  --dark-blue: #015CAD;
+  --white: #ffffff;
+  --black: #000000;
+  --gray-bg: #f4f4f4;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: var(--gray-bg);
+}
+
+/* Otsikkopalkki */
+.linja-otsikko {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+/* Tunti-solun parannettu tyyli */
+td.tunti-solu {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  font-weight: bold;
+  width: 15%;
+  border-bottom: 3px solid var(--white);
+}
+
+/* Minuuttisolut */
+td.minuutti-solu {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+/* Esikatselu */
+.preview-box {
+  background: #fff;
+  padding: 10px;
+  border-left: 5px solid var(--dark-blue);
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  font-weight: bold;
+}
+/* Vuorotellen valkoinen ja Very Light Green Blue */
+tbody tr:nth-child(odd) td.minuutti-solu {
+  background-color: #FFFFFF; /* valkoinen */
+}
+
+tbody tr:nth-child(even) td.minuutti-solu {
+  background-color: #D2F0FF; /* Very Light Green Blue */
+}
+.p-laatikko {
+  display: inline-block;
+  background-color: #ffffff;   /* valkoinen tausta */
+  color: #000000;              /* musta fontti */
+  border: 2px solid #ffffff;   /* musta reunaviiva */
+  padding: 2px 6px;            /* sisätyhjä */
+  font-weight: bold;
+  border-radius: 4px;          /* pehmeät kulmat */
+  margin-right: 8px;           /* tilaa tekstille */
+}
+
+.seliteteksti {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #000000;
+  background-color: #ffffff;
+  padding: 5px 0;
+  text-align: left;
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="linja-otsikko">
+  <h1>Linja 18/ Atala - Kaupin kampus</h1>
+  <p>Syksy | Voimassa: 5.8.–10.11.2026</p>
+</header>
+
+<main class="aikataulu-kontti">
+
+ <section class="paiva-osio">
+  <h2>Maanantai - Perjantai</h2>
+  <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
+  <table id="arkipaivat-table"></table>
+
+  <div class="seliteteksti">
+    <span class="p-laatikko"></span>
+    
+  </div>
+</section>
+
+<section class="paiva-osio">
+  <h2>Lauantai</h2>
+  <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
+  <table id="lauantai-table"></table>
+</section>
+
+<section class="paiva-osio">
+  <h2>Sunnuntai</h2>
+  <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
+  <table id="sunnuntai-table"></table>
+</section>
+
+<section class="poikkeustiedot">
+  <h3>Poikkeustiedot</h3>
+  <p>Tällä linjalla saattaa esiintyä reittimuutoksia (2028–2032) raitiotien rakentamisen vuoksi.</p>
+  <p>Mahdolliset muutokset voivat sisältää väliaikaisia kiertoreittejä tai pysäkkisiirtoja.</p>
+</section>
+
+
+</main>
+
+<script>
+async function lataaAikataulu(tiedosto, taulukkoId) {
+  const response = await fetch(tiedosto);
+  const data = await response.text();
+  const rivit = data.trim().split('\n');
+
+  const taulukko = document.getElementById(taulukkoId);
+  taulukko.innerHTML = '';
+
+  const otsikot = rivit[0].split(',');
+
+  const thead = document.createElement('thead');
+  const otsikkoRivi = document.createElement('tr');
+
+  // --- UUSI OTSIKKORIVI ---
+  const tuntiTh = document.createElement('th');
+  tuntiTh.textContent = 'Tunti';
+  otsikkoRivi.appendChild(tuntiTh);
+
+  const minuuttiTh = document.createElement('th');
+  minuuttiTh.textContent = 'Minuutit';
+  minuuttiTh.colSpan = otsikot.length + 2;   // yhdistää kaikki minuutti-sarakkeet
+  otsikkoRivi.appendChild(minuuttiTh);
+
+  thead.appendChild(otsikkoRivi);
+  taulukko.appendChild(thead);
+
+  // --- TAULUKON RUNKO ---
+  const tbody = document.createElement('tbody');
+
+  for (let i = 1; i < rivit.length; i++) {
+    const sarakkeet = rivit[i].split(',');
+    const tr = document.createElement('tr');
+
+    // Tunti-solu
+    const tuntiTd = document.createElement('td');
+    tuntiTd.textContent = sarakkeet[0];
+    tuntiTd.className = 'tunti-solu';
+    tr.appendChild(tuntiTd);
+
+    // Minuuttisolut
+    for (let j = 1; j < sarakkeet.length; j++) {
+      const td = document.createElement('td');
+      td.className = 'minuutti-solu';
+      td.textContent = sarakkeet[j];
+      tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+  }
+
+  taulukko.appendChild(tbody);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  lataaAikataulu('arkipaivat.csv', 'arkipaivat-table');
+  lataaAikataulu('lauantai.csv', 'lauantai-table');
+  lataaAikataulu('sunnuntai.csv', 'sunnuntai-table');
+});
+</script>
+
+</body>
+</html>
