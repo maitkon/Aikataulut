@@ -83,7 +83,7 @@ tbody tr:nth-child(even) td.minuutti-solu {
   display: inline-block;
   background-color: #ffffff;   /* valkoinen tausta */
   color: #000000;              /* musta fontti */
-  border: 2px solid #000000;   /* musta reunaviiva */
+  border: 2px solid #ffffff;   /* musta reunaviiva */
   padding: 2px 6px;            /* sisätyhjä */
   font-weight: bold;
   border-radius: 4px;          /* pehmeät kulmat */
@@ -105,7 +105,7 @@ tbody tr:nth-child(even) td.minuutti-solu {
 <body>
 
 <header class="linja-otsikko">
-  <h1>Linja 18 / Atala - Kaupin kampus</h1>
+  <h1>Linja 18 (4576)/ Atala - Kaupin kampus</h1>
   <p>Kesäaikataulu | Voimassa: 1.6.–4.8.2026</p>
 </header>
 
@@ -113,28 +113,28 @@ tbody tr:nth-child(even) td.minuutti-solu {
 
  <section class="paiva-osio">
   <h2>Maanantai - Perjantai</h2>
-  <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
+  <div class="preview-box">Esikatselu: Arkipäivien aikataulu</div>
   <table id="arkipaivat-table"></table>
 
   
-  </div>
+  
 </section>
 
 <section class="paiva-osio">
   <h2>Lauantai</h2>
-  <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
+  <div class="preview-box">Esikatselu: Lauantain aikataulu</div>
   <table id="lauantai-table"></table>
 </section>
 
 <section class="paiva-osio">
   <h2>Sunnuntai</h2>
-  <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
+  <div class="preview-box">Esikatselu: Sunnuntain aikataulu</div>
   <table id="sunnuntai-table"></table>
 </section>
 
 <section class="poikkeustiedot">
   <h3>Poikkeustiedot</h3>
-  <p>Tällä linjalla saattaa esiintyä reittimuutoksia (2028–2032) raitiotien rakentamisen vuoksi.</p>
+  <p>Tällä linjalla saattaa esiintyä reittimuutoksia raitiotien rakentamisen vuoksi.</p>
   <p>Mahdolliset muutokset voivat sisältää väliaikaisia kiertoreittejä tai pysäkkisiirtoja.</p>
 </section>
 
@@ -150,38 +150,35 @@ async function lataaAikataulu(tiedosto, taulukkoId) {
   const taulukko = document.getElementById(taulukkoId);
   taulukko.innerHTML = '';
 
+  const maxCols = Math.max(...rivit.map(r => r.split(',').length));
   const otsikot = rivit[0].split(',');
 
   const thead = document.createElement('thead');
   const otsikkoRivi = document.createElement('tr');
 
-  // --- UUSI OTSIKKORIVI ---
   const tuntiTh = document.createElement('th');
   tuntiTh.textContent = 'Tunti';
   otsikkoRivi.appendChild(tuntiTh);
 
   const minuuttiTh = document.createElement('th');
   minuuttiTh.textContent = 'Minuutit';
-  minuuttiTh.colSpan = otsikot.length - 1;   // yhdistää kaikki minuutti-sarakkeet
+  minuuttiTh.colSpan = maxCols - 1;
   otsikkoRivi.appendChild(minuuttiTh);
 
   thead.appendChild(otsikkoRivi);
   taulukko.appendChild(thead);
 
-  // --- TAULUKON RUNKO ---
   const tbody = document.createElement('tbody');
 
-  for (let i = 0; i < rivit.length; i++) {
+  for (let i = 1; i < rivit.length; i++) {
     const sarakkeet = rivit[i].split(',');
     const tr = document.createElement('tr');
 
-    // Tunti-solu
     const tuntiTd = document.createElement('td');
     tuntiTd.textContent = sarakkeet[0];
     tuntiTd.className = 'tunti-solu';
     tr.appendChild(tuntiTd);
 
-    // Minuuttisolut
     for (let j = 1; j < sarakkeet.length; j++) {
       const td = document.createElement('td');
       td.className = 'minuutti-solu';
