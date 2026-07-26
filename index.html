@@ -1,255 +1,205 @@
-<!DOCTYPE html>
 <html lang="fi">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
-<title>18 Pikkupiiankatu (4576) Aikataulut KESÄ (1.6.–4.8.2026)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linja-aikataulu</title>
+
 <style>
+:root {
+  --dark-blue: #015CAD;
+  --white: #ffffff;
+  --black: #000000;
+  --gray-bg: #f4f4f4;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: var(--gray-bg);
 }
 
-/* Pääotsikko */
-.main-title {
-    background-color: #025CAE;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    font-size: 20px;
-    margin-bottom: 20px;
+/* Otsikkopalkki */
+.linja-otsikko {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 30px;
 }
 
-/* Päiväotsikot */
-.section-title {
-    margin-top: 20px;
-    margin-bottom: 5px;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-/* Taulukko */
-table.aikataulu {
-    width: 100%;
-    max-width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 10px;
-}
-
-/* Solujen perusulkoasu */
-.cell {
-    border: 1px solid #444;
-    text-align: center;
-    height: 32px;
-    padding: 6px;
-    width: auto;
-    font-size: 16px;
-}
-
-/* KLO-solu */
-.klo {
-    width: 8%;
-    background-color: #025CAE;
-    color: white;
-    border-bottom: 2px solid white;
-    font-weight: bold;
+/* Tunti-solun parannettu tyyli */
+td.tunti-solu {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  font-weight: bold;
+  width: 15%;
+  border-bottom: 3px solid var(--white);
 }
 
 /* Minuuttisolut */
-.min {
-    width: 8%;
-    background-color: white;
-    color: black;
+td.minuutti-solu {
+  background-color: var(--white);
+  color: var(--black);
 }
 
-/* Otsikkosolut */
-.klo-head {
-    background-color: #025CAE;
-    color: white;
-    border-bottom: 2px solid white;
+/* Esikatselu */
+.preview-box {
+  background: #fff;
+  padding: 10px;
+  border-left: 5px solid var(--dark-blue);
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: #333;
 }
 
-.min-head {
-    background-color: #025CAE;
-    color: white;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
 }
 
-/* PDF-tulostus */
-@media print {
-
-    .cell {
-        font-size: 18px;
-        padding: 6px;
-    }
-
-    .klo {
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .main-title {
-        font-size: 22px;
-    }
-
-    .section-title {
-        font-size: 20px;
-    }
-
-    table.aikataulu {
-        page-break-inside: avoid;
-    }
+th, td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
 }
 
-/* MOBIILIVERSIO */
-@media screen and (max-width: 900px) {
-
-    * {
-        box-sizing: border-box;
-    }
-
-    html, body {
-        max-width: 100% !important;
-        overflow-x: hidden;
-    }
-
-    table.aikataulu {
-        width: 100% !important;
-        table-layout: fixed !important;
-    }
-
-    body {
-        margin: 10px;
-        font-size: 18px;
-    }
-
-    .main-title {
-        font-size: 24px;
-        padding: 14px;
-    }
-
-    .section-title {
-        font-size: 22px;
-        margin-top: 15px;
-    }
-
-    /* Piilotetaan otsikkorivi */
-    table.aikataulu thead,
-    table.aikataulu tr:first-child {
-        display: none;
-    }
-
-    /* Jokainen tuntirivi kortiksi */
-    table.aikataulu tr {
-        display: block;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        padding: 12px;
-        margin-bottom: 12px;
-        background-color: #f9f9f9;
-    }
-
-    /* KLO ylös isolla fontilla */
-    .klo {
-        display: block;
-        width: 100%;
-        text-align: left;
-        font-size: 24px;
-        margin-bottom: 8px;
-        background-color: transparent;
-        color: #025CAE;
-        border-bottom: none;
-        font-weight: bold;
-    }
-
-    /* Minuutit pillereiksi */
-    .min {
-        display: inline-block;
-        width: auto;
-        min-width: 45px;
-        text-align: center;
-        font-size: 20px;
-        margin-right: 8px;
-        background-color: white;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 6px 8px;
-    }
-
-    .min.small-font {
-        font-size: 19px;
-    }
-
-    .min.xsmall-font {
-        font-size: 18px;
-    }
+th {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  font-weight: bold;
 }
+/* Vuorotellen valkoinen ja Very Light Green Blue */
+tbody tr:nth-child(odd) td.minuutti-solu {
+  background-color: #FFFFFF; /* valkoinen */
+}
+
+tbody tr:nth-child(even) td.minuutti-solu {
+  background-color: #D2F0FF; /* Very Light Green Blue */
+}
+.p-laatikko {
+  display: inline-block;
+  background-color: #ffffff;   /* valkoinen tausta */
+  color: #000000;              /* musta fontti */
+  border: 2px solid #000000;   /* musta reunaviiva */
+  padding: 2px 6px;            /* sisätyhjä */
+  font-weight: bold;
+  border-radius: 4px;          /* pehmeät kulmat */
+  margin-right: 8px;           /* tilaa tekstille */
+}
+
+.seliteteksti {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #000000;
+  background-color: #ffffff;
+  padding: 5px 0;
+  text-align: left;
+}
+
 </style>
-<h2 class="main-title">
-    18 Pikkupiiankatu (4576) Aikataulut KESÄ (1.6.–4.8.2026)
-</h2>
+</head>
 
-<div class="section-title">Maanantai – Perjantai</div>
-<table class="aikataulu" id="tbl-mape">
-    <tr>
-        <th class="cell klo-head">KLO</th>
-        <th class="cell min-head" colspan="4">Minuutit</th>
-    </tr>
-</table>
+<body>
 
-<div class="section-title">Lauantai</div>
-<table class="aikataulu" id="tbl-la">
-    <tr>
-        <th class="cell klo-head">KLO</th>
-        <th class="cell min-head" colspan="4">Minuutit</th>
-    </tr>
-</table>
+<header class="linja-otsikko">
+  <h1>Linja 18 (4576)/ Atala - Kaupin kampus</h1>
+  <p>Kesäaikataulu | Voimassa: 1.6.–4.8.2026</p>
+</header>
 
-<div class="section-title">Sunnuntai</div>
-<table class="aikataulu" id="tbl-su">
-    <tr>
-        <th class="cell klo-head">KLO</th>
-        <th class="cell min-head" colspan="4">Minuutit</th>
-    </tr>
-</table>
+<main class="aikataulu-kontti">
+
+ <section class="paiva-osio">
+  <h2>Maanantai - Perjantai</h2>
+  <div class="preview-box">Esikatselu: Arkipäivien aikataulu</div>
+  <table id="arkipaivat-table"></table>
+
+  
+  </div>
+</section>
+
+<section class="paiva-osio">
+  <h2>Lauantai</h2>
+  <div class="preview-box">Esikatselu: Lauantain aikataulu</div>
+  <table id="lauantai-table"></table>
+</section>
+
+<section class="paiva-osio">
+  <h2>Sunnuntai</h2>
+  <div class="preview-box">Esikatselu: Sunnuntain aikataulu</div>
+  <table id="sunnuntai-table"></table>
+</section>
+
+<section class="poikkeustiedot">
+  <h3>Poikkeustiedot</h3>
+  <p>Tällä linjalla saattaa esiintyä reittimuutoksia raitiotien rakentamisen vuoksi.</p>
+  <p>Mahdolliset muutokset voivat sisältää väliaikaisia kiertoreittejä tai pysäkkisiirtoja.</p>
+</section>
+
+
+</main>
 
 <script>
-function loadCsvToTable(csvFile, tableId) {
-    fetch(csvFile)
-        .then(r => r.text())
-        .then(text => {
-            const rows = text.trim().split(/\r?\n/);
-            const table = document.getElementById(tableId);
+async function lataaAikataulu(tiedosto, taulukkoId) {
+  const response = await fetch(tiedosto);
+  const data = await response.text();
+  const rivit = data.trim().split('\n');
 
-            rows.forEach(line => {
-                const cols = line.split(",");
-                const tr = document.createElement("tr");
+  const taulukko = document.getElementById(taulukkoId);
+  taulukko.innerHTML = '';
 
-                // Tunti (KLO-sarake)
-                const tdKlo = document.createElement("td");
-                tdKlo.className = "cell klo";
-                tdKlo.textContent = cols[0] || "";
-                tr.appendChild(tdKlo);
+  const otsikot = rivit[0].split(',');
 
-                // Minuutit (max 4 solua)
-                for (let i = 1; i <= 4; i++) {
-                    const tdMin = document.createElement("td");
-                    tdMin.className = "cell min";
-                    tdMin.textContent = cols[i] || "";
-                    tr.appendChild(tdMin);
-                }
+  const thead = document.createElement('thead');
+  const otsikkoRivi = document.createElement('tr');
 
-                table.appendChild(tr);
-            });
-        })
-        .catch(err => {
-            console.error("CSV-lataus epäonnistui:", csvFile, err);
-        });
+  // --- UUSI OTSIKKORIVI ---
+  const tuntiTh = document.createElement('th');
+  tuntiTh.textContent = 'Tunti';
+  otsikkoRivi.appendChild(tuntiTh);
+
+  const minuuttiTh = document.createElement('th');
+  minuuttiTh.textContent = 'Minuutit';
+  minuuttiTh.colSpan = otsikot.length - 1;   // yhdistää kaikki minuutti-sarakkeet
+  otsikkoRivi.appendChild(minuuttiTh);
+
+  thead.appendChild(otsikkoRivi);
+  taulukko.appendChild(thead);
+
+  // --- TAULUKON RUNKO ---
+  const tbody = document.createElement('tbody');
+
+  for (let i = 0; i < rivit.length; i++) {
+    const sarakkeet = rivit[i].split(',');
+    const tr = document.createElement('tr');
+
+    // Tunti-solu
+    const tuntiTd = document.createElement('td');
+    tuntiTd.textContent = sarakkeet[0];
+    tuntiTd.className = 'tunti-solu';
+    tr.appendChild(tuntiTd);
+
+    // Minuuttisolut
+    for (let j = 1; j < sarakkeet.length; j++) {
+      const td = document.createElement('td');
+      td.className = 'minuutti-solu';
+      td.textContent = sarakkeet[j];
+      tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+  }
+
+  taulukko.appendChild(tbody);
 }
 
-// Lataa kolme eri CSV-tiedostoa
-loadCsvToTable("aikataulu_mape.csv", "tbl-mape");
-loadCsvToTable("aikataulu_la.csv", "tbl-la");
-loadCsvToTable("aikataulu_su.csv", "tbl-su");
+window.addEventListener('DOMContentLoaded', () => {
+  lataaAikataulu('aikataulu_mape.csv', 'arkipaivat-table');
+  lataaAikataulu('aikataulu_la.csv', 'lauantai-table');
+  lataaAikataulu('aikataulu_su.csv', 'sunnuntai-table');
+});
 </script>
 
 </body>
