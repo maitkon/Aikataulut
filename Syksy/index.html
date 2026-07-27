@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Linja-aikataulu</title>
 
-    <!-- Ulkoinen normaali ulkoasu -->
     <link rel="stylesheet" href="styles.css">
-
-    <!-- Tulostusystävällinen CSS -->
     <link rel="stylesheet" href="print.css" media="print">
 </head>
 
@@ -54,20 +51,15 @@
 
 <script>
 async function lataaAikataulu(tiedosto, taulukkoId) {
-
-    // Lataa CSV
     const response = await fetch(tiedosto);
     const data = await response.text();
     const csvRivit = data.trim().split('\n');
 
-    // Taulukon kohde
     const taulukko = document.getElementById(taulukkoId);
     taulukko.innerHTML = '';
 
-    // Sarakkeiden määrä
     const maxCols = Math.max(...csvRivit.map(r => r.split(',').length));
 
-    // Otsikkorivi
     const thead = document.createElement('thead');
     const otsikkoRivi = document.createElement('tr');
 
@@ -83,7 +75,6 @@ async function lataaAikataulu(tiedosto, taulukkoId) {
     thead.appendChild(otsikkoRivi);
     taulukko.appendChild(thead);
 
-    // Taulukon runko
     const tbody = document.createElement('tbody');
 
     for (let i = 1; i < csvRivit.length; i++) {
@@ -105,7 +96,7 @@ async function lataaAikataulu(tiedosto, taulukkoId) {
         tbody.appendChild(tr);
     }
 
-    // --- Korosta nykyinen tunti ja seuraava lähtö ---
+    // Korosta nykyinen tunti ja seuraava lähtö
     const nyt = new Date();
     const nykyinenTunti = nyt.getHours();
     const nykyinenMinuutti = nyt.getMinutes();
@@ -122,7 +113,7 @@ async function lataaAikataulu(tiedosto, taulukkoId) {
 
             for (let j = 1; j < rivi.children.length; j++) {
                 const minuutti = parseInt(rivi.children[j].textContent);
-                if (minuutti >= nykyinenMinuutti) {
+                if (!isNaN(minuutti) && minuutti >= nykyinenMinuutti) {
                     seuraava = rivi.children[j];
                     break;
                 }
@@ -134,11 +125,9 @@ async function lataaAikataulu(tiedosto, taulukkoId) {
         }
     });
 
-    // Lisää taulukko DOMiin
     taulukko.appendChild(tbody);
 }
 
-// Lataa kaikki taulukot
 window.addEventListener('DOMContentLoaded', () => {
     lataaAikataulu('aikataulu_mape.csv', 'arkipaivat-table');
     lataaAikataulu('aikataulu_la.csv', 'lauantai-table');
