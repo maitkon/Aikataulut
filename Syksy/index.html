@@ -14,7 +14,7 @@
     <!-- JavaScript -->
     <script src="script.js" defer></script>
 
-    <!-- Sisäinen CSS (jos haluat pitää tämän mukana) -->
+    <!-- Sisäinen CSS (valinnainen, jos haluat pitää tämän mukana) -->
     <style>
         :root {
           --dark-blue: #015CAD;
@@ -30,7 +30,6 @@
           background-color: var(--gray-bg);
         }
 
-        /* Otsikkopalkki */
         .linja-otsikko {
           background-color: var(--dark-blue);
           color: var(--white);
@@ -40,7 +39,6 @@
           margin-bottom: 30px;
         }
 
-        /* Tunti-solun parannettu tyyli */
         td.tunti-solu {
           background-color: var(--dark-blue);
           color: var(--white);
@@ -49,13 +47,11 @@
           border-bottom: 3px solid var(--white);
         }
 
-        /* Minuuttisolut */
         td.minuutti-solu {
           background-color: var(--white);
           color: var(--black);
         }
 
-        /* Esikatselu */
         .preview-box {
           background: #fff;
           padding: 10px;
@@ -110,5 +106,118 @@
           padding: 5px 0;
           text-align: left;
         }
+
+        .aikataulu-kontti {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 16px;
+        }
+
+        .paiva-osio {
+          margin-bottom: 24px;
+          background: #ffffff;
+          border-radius: 6px;
+          padding: 12px;
+        }
     </style>
 </head>
+
+<body>
+
+<header class="linja-otsikko">
+  <h1>Linja 18 / Atala - Kaupin kampus</h1>
+  <p>Syksy | Voimassa: 5.8.–10.11.2026</p>
+</header>
+
+<nav style="text-align:center; margin-bottom:20px;">
+  <a href="/Aikataulut/" style="margin-right:20px; font-weight:bold;">Kesä</a>
+  <a href="/Aikataulut/Syksy/" style="font-weight:bold;">Syksy</a>
+</nav>
+
+<main class="aikataulu-kontti">
+
+  <section class="paiva-osio">
+    <h2>Maanantai - Perjantai</h2>
+    <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
+    <table id="arkipaivat-table"></table>
+  </section>
+
+  <section class="paiva-osio">
+    <h2>Lauantai</h2>
+    <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
+    <table id="lauantai-table"></table>
+  </section>
+
+  <section class="paiva-osio">
+    <h2>Sunnuntai</h2>
+    <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
+    <table id="sunnuntai-table"></table>
+  </section>
+
+  <section class="poikkeustiedot">
+    <h3>Poikkeustiedot</h3>
+    <p>Tällä linjalla saattaa esiintyä reittimuutoksia (2028–2032) raitiotien rakentamisen vuoksi.</p>
+    <p>Mahdolliset muutokset voivat sisältää väliaikaisia kiertoreittejä tai pysäkkisiirtoja.</p>
+  </section>
+
+</main>
+
+<script>
+async function lataaAikataulu(tiedosto, taulukkoId) {
+  const response = await fetch(tiedosto);
+  const data = await response.text();
+  const rivit = data.trim().split('\n');
+
+  const taulukko = document.getElementById(taulukkoId);
+  taulukko.innerHTML = '';
+
+  const maxCols = Math.max(...rivit.map(r => r.split(',').length));
+
+  const thead = document.createElement('thead');
+  const otsikkoRivi = document.createElement('tr');
+
+  const tuntiTh = document.createElement('th');
+  tuntiTh.textContent = 'Tunti';
+  otsikkoRivi.appendChild(tuntiTh);
+
+  const minuuttiTh = document.createElement('th');
+  minuuttiTh.textContent = 'Minuutit';
+  minuuttiTh.colSpan = maxCols - 1;
+  otsikkoRivi.appendChild(minuuttiTh);
+
+  thead.appendChild(otsikkoRivi);
+  taulukko.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+
+  for (let i = 1; i < rivit.length; i++) {
+    const sarakkeet = rivit[i].split(',');
+    const tr = document.createElement('tr');
+
+    const tuntiTd = document.createElement('td');
+    tuntiTd.textContent = sarakkeet[0];
+    tuntiTd.className = 'tunti-solu';
+    tr.appendChild(tuntiTd);
+
+    for (let j = 1; j < sarakkeet.length; j++) {
+      const td = document.createElement('td');
+      td.className = 'minuutti-solu';
+      td.textContent = sarakkeet[j];
+      tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+  }
+
+  taulukko.appendChild(tbody);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  lataaAikataulu('aikataulu_mape.csv', 'arkipaivat-table');
+  lataaAikataulu('aikataulu_la.csv', 'lauantai-table');
+  lataaAikataulu('aikataulu_su.csv', 'sunnuntai-table');
+});
+</script>
+
+</body>
+</html>
