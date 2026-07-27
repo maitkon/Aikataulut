@@ -93,3 +93,21 @@ async function lataaAikataulu(tiedosto, taulukkoId) {
             const td = document.createElement('td');
             td.className = 'minuutti-solu';
             td.textContent = sarakkeet[j];
+            tr.appendChild(td);
+        }
+
+        tbody.appendChild(tr);
+    }
+
+    taulukko.appendChild(tbody);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    lataaAikataulu('aikataulu_mape.csv', 'arkipaivat-table');
+    lataaAikataulu('aikataulu_la.csv', 'lauantai-table');
+    lataaAikataulu('aikataulu_su.csv', 'sunnuntai-table');
+});
+</script>
+
+</body>
+</html>
