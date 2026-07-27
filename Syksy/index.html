@@ -54,15 +54,20 @@
 
 <script>
 async function lataaAikataulu(tiedosto, taulukkoId) {
+
+    // Lataa CSV
     const response = await fetch(tiedosto);
     const data = await response.text();
-    const rivit = data.trim().split('\n');
+    const csvRivit = data.trim().split('\n');
 
+    // Taulukon kohde
     const taulukko = document.getElementById(taulukkoId);
     taulukko.innerHTML = '';
 
-    const maxCols = Math.max(...rivit.map(r => r.split(',').length));
+    // Sarakkeiden määrä
+    const maxCols = Math.max(...csvRivit.map(r => r.split(',').length));
 
+    // Otsikkorivi
     const thead = document.createElement('thead');
     const otsikkoRivi = document.createElement('tr');
 
@@ -78,10 +83,11 @@ async function lataaAikataulu(tiedosto, taulukkoId) {
     thead.appendChild(otsikkoRivi);
     taulukko.appendChild(thead);
 
+    // Taulukon runko
     const tbody = document.createElement('tbody');
 
-    for (let i = 1; i < rivit.length; i++) {
-        const sarakkeet = rivit[i].split(',');
+    for (let i = 1; i < csvRivit.length; i++) {
+        const sarakkeet = csvRivit[i].split(',');
         const tr = document.createElement('tr');
 
         const tuntiTd = document.createElement('td');
@@ -98,40 +104,41 @@ async function lataaAikataulu(tiedosto, taulukkoId) {
 
         tbody.appendChild(tr);
     }
-// --- Korosta nykyinen tunti ja seuraava lähtö ---
-const nyt = new Date();
-const nykyinenTunti = nyt.getHours();
-const nykyinenMinuutti = nyt.getMinutes();
 
-const rivit = tbody.querySelectorAll("tr");
+    // --- Korosta nykyinen tunti ja seuraava lähtö ---
+    const nyt = new Date();
+    const nykyinenTunti = nyt.getHours();
+    const nykyinenMinuutti = nyt.getMinutes();
 
-rivit.forEach(rivi => {
-    const tunti = parseInt(rivi.children[0].textContent);
+    const taulukkoRivit = tbody.querySelectorAll("tr");
 
-    if (tunti === nykyinenTunti) {
-        rivi.classList.add("nyt-tunti");
+    taulukkoRivit.forEach(rivi => {
+        const tunti = parseInt(rivi.children[0].textContent);
 
-        let seuraava = null;
+        if (tunti === nykyinenTunti) {
+            rivi.classList.add("nyt-tunti");
 
-        for (let j = 1; j < rivi.children.length; j++) {
-            const minuutti = parseInt(rivi.children[j].textContent);
-            if (minuutti >= nykyinenMinuutti) {
-                seuraava = rivi.children[j];
-                break;
+            let seuraava = null;
+
+            for (let j = 1; j < rivi.children.length; j++) {
+                const minuutti = parseInt(rivi.children[j].textContent);
+                if (minuutti >= nykyinenMinuutti) {
+                    seuraava = rivi.children[j];
+                    break;
+                }
+            }
+
+            if (seuraava) {
+                seuraava.classList.add("nyt-lahto");
             }
         }
+    });
 
-        if (seuraava) {
-            seuraava.classList.add("nyt-lahto");
-        }
-    }
-});
-
-// --- TÄMÄ JÄÄ ALLE ---
-
+    // Lisää taulukko DOMiin
     taulukko.appendChild(tbody);
 }
 
+// Lataa kaikki taulukot
 window.addEventListener('DOMContentLoaded', () => {
     lataaAikataulu('aikataulu_mape.csv', 'arkipaivat-table');
     lataaAikataulu('aikataulu_la.csv', 'lauantai-table');
