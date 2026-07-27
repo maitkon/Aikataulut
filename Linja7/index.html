@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <title>Linja 7 / Linnainmaa - Tesoma</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script>
+    function lataaAikataulu(csvTiedosto, tableId) {
+      fetch(csvTiedosto)
+        .then(response => response.text())
+        .then(data => {
+          const rows = data.trim().split("\n").map(r => r.split(","));
+          const table = document.getElementById(tableId);
+          table.innerHTML = "";
+
+          rows.forEach(row => {
+            const tr = document.createElement("tr");
+            row.forEach(cell => {
+              const td = document.createElement("td");
+              td.textContent = cell;
+              tr.appendChild(td);
+            });
+            table.appendChild(tr);
+          });
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      lataaAikataulu("aikataulu_mape.csv", "arkipaivat-table");
+      lataaAikataulu("aikataulu_la.csv", "lauantai-table");
+      lataaAikataulu("aikataulu_su.csv", "sunnuntai-table");
+    });
+  </script>
+</head>
+
+<body>
+
+<header class="linja-otsikko">
+  <h1>Linja 7 / Linnainmaa - Tesoma</h1>
+  <p>Syksy | Voimassa: 5.8.–10.11.2026</p>
+  <p>Lähtö: Linnainmaa D (5081, Vyöhyke B)</p>
+</header>
+
+<nav style="text-align:center; margin-bottom:20px;">
+  <a href="/Aikataulut/" style="font-weight:bold;">Etusivu</a>
+</nav>
+
+<main class="aikataulu-kontti">
+
+  <section class="paiva-osio">
+    <h2>Maanantai - Perjantai</h2>
+    <div class="preview-box">Esikatselu: Arkipäivien aikataulu</div>
+    <table id="arkipaivat-table"></table>
+  </section>
+
+  <section class="paiva-osio">
+    <h2>Lauantai</h2>
+    <div class="preview-box">Esikatselu: Lauantain aikataulu</div>
+    <table id="lauantai-table"></table>
+  </section>
+
+  <section class="paiva-osio">
+    <h2>Sunnuntai</h2>
+    <div class="preview-box">Esikatselu: Sunnuntain aikataulu</div>
+    <table id="sunnuntai-table"></table>
+  </section>
+
+</main>
+
+</body>
+</html>
 
