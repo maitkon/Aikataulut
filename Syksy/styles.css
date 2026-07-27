@@ -1,1 +1,129 @@
 
+/* ------------------------------
+   Värit ja perusasetukset
+--------------------------------*/
+:root {
+  --dark-blue: #015CAD;
+  --white: #ffffff;
+  --black: #000000;
+  --gray-bg: #f4f4f4;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: var(--gray-bg);
+}
+
+/* ------------------------------
+   Otsikkopalkki
+--------------------------------*/
+.linja-otsikko {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+/* ------------------------------
+   Taulukon solut
+--------------------------------*/
+td.tunti-solu {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  font-weight: bold;
+  width: 15%;
+  border-bottom: 3px solid var(--white);
+}
+
+td.minuutti-solu {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+/* ------------------------------
+   Esikatselulaatikko
+--------------------------------*/
+.preview-box {
+  background: #fff;
+  padding: 10px;
+  border-left: 5px solid var(--dark-blue);
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* ------------------------------
+   Taulukon yleiset tyylit
+--------------------------------*/
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  font-weight: bold;
+}
+
+/* Vuorotellen valkoinen ja Very Light Green Blue */
+tbody tr:nth-child(odd) td.minuutti-solu {
+  background-color: #FFFFFF;
+}
+
+tbody tr:nth-child(even) td.minuutti-solu {
+  background-color: #D2F0FF;
+}
+
+/* ------------------------------
+   P-laatikko
+--------------------------------*/
+.p-laatikko {
+  display: inline-block;
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid #ffffff;
+  padding: 2px 6px;
+  font-weight: bold;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+/* ------------------------------
+   Seliteteksti
+--------------------------------*/
+.seliteteksti {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #000000;
+  background-color: #ffffff;
+  padding: 5px 0;
+  text-align: left;
+}
+
+/* ------------------------------
+   Layout-kontit
+--------------------------------*/
+.aikataulu-kontti {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.paiva-osio {
+  margin-bottom: 24px;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 12px;
+}
