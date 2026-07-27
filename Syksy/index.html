@@ -98,6 +98,36 @@ async function lataaAikataulu(tiedosto, taulukkoId) {
 
         tbody.appendChild(tr);
     }
+// --- Korosta nykyinen tunti ja seuraava lähtö ---
+const nyt = new Date();
+const nykyinenTunti = nyt.getHours();
+const nykyinenMinuutti = nyt.getMinutes();
+
+const rivit = tbody.querySelectorAll("tr");
+
+rivit.forEach(rivi => {
+    const tunti = parseInt(rivi.children[0].textContent);
+
+    if (tunti === nykyinenTunti) {
+        rivi.classList.add("nyt-tunti");
+
+        let seuraava = null;
+
+        for (let j = 1; j < rivi.children.length; j++) {
+            const minuutti = parseInt(rivi.children[j].textContent);
+            if (minuutti >= nykyinenMinuutti) {
+                seuraava = rivi.children[j];
+                break;
+            }
+        }
+
+        if (seuraava) {
+            seuraava.classList.add("nyt-lahto");
+        }
+    }
+});
+
+// --- TÄMÄ JÄÄ ALLE ---
 
     taulukko.appendChild(tbody);
 }
