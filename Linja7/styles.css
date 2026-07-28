@@ -93,7 +93,7 @@ tbody tr:nth-child(even) td.minuutti-solu {
   display: inline-block;
   background-color: #ffffff;
   color: #000000;
-  border: 2px solid #ffffff;
+  border: 2px solid #000000;
   padding: 2px 6px;
   font-weight: bold;
   border-radius: 4px;
