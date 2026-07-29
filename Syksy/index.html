@@ -55,6 +55,42 @@
 </main>
 
 <script>
+    async function lataaPysakit() {
+    const response = await fetch('pysakit.csv');
+    const data = await response.text();
+    const rivit = data.trim().split('\n');
+
+    const kontti = document.getElementById('pysakki-lista');
+    kontti.innerHTML = '';
+
+    let riviHtml = '';
+
+    rivit.forEach((rivi, index) => {
+        const osat = rivi.split(',');
+        const nimi = osat[0];
+        const koodi = osat[1];
+        const status = osat[2] || 'aktiivinen';
+
+        let merkinta = `${nimi} (${koodi})`;
+
+        // Status-värikoodaus
+        if (status === 'tilapäinen') {
+            merkinta = `<span style="color: orange; font-weight: bold;">${merkinta}</span>`;
+        } else if (status === 'poistettu') {
+            merkinta = `<span style="color: red; text-decoration: line-through;">${merkinta}</span>`;
+        }
+
+        // Lisää pystyviiva paitsi viimeiseen
+        if (index < rivit.length - 1) {
+            riviHtml += merkinta + ' | ';
+        } else {
+            riviHtml += merkinta;
+        }
+    });
+
+    kontti.innerHTML = `<p>${riviHtml}</p>`;
+}
+
 async function lataaAikataulu(tiedosto, taulukkoId) {
     const response = await fetch(tiedosto);
     const data = await response.text();
@@ -137,6 +173,8 @@ window.addEventListener('DOMContentLoaded', () => {
     lataaAikataulu('aikataulu_mape.csv', 'arkipaivat-table');
     lataaAikataulu('aikataulu_la.csv', 'lauantai-table');
     lataaAikataulu('aikataulu_su.csv', 'sunnuntai-table');
+    lataaPysakit();
+
 });
 </script>
 
