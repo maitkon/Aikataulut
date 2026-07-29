@@ -40,6 +40,9 @@ body {
     margin-top: 10px;
     border: 1px solid #e0e0e0;
 }
+#pysakki-lista {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
 
 /* Pysäkkilistan tekstin tyyli */
 #pysakki-lista p {
