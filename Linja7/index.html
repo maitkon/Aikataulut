@@ -57,63 +57,7 @@
 
 </main>
 
-<script>
-async function lataaAikataulu(tiedosto, taulukkoId) {
-  const response = await fetch(tiedosto);
-  const data = await response.text();
-  const rivit = data.trim().split('\n');
 
-  const taulukko = document.getElementById(taulukkoId);
-  taulukko.innerHTML = '';
-
-  const maxCols = Math.max(...rivit.map(r => r.split(',').length));
-  const otsikot = rivit[0].split(',');
-
-  const thead = document.createElement('thead');
-  const otsikkoRivi = document.createElement('tr');
-
-  const tuntiTh = document.createElement('th');
-  tuntiTh.textContent = 'Tunti';
-  otsikkoRivi.appendChild(tuntiTh);
-
-  const minuuttiTh = document.createElement('th');
-  minuuttiTh.textContent = 'Minuutit';
-  minuuttiTh.colSpan = maxCols - 1;
-  otsikkoRivi.appendChild(minuuttiTh);
-
-  thead.appendChild(otsikkoRivi);
-  taulukko.appendChild(thead);
-
-  const tbody = document.createElement('tbody');
-
-  for (let i = 1; i < rivit.length; i++) {
-    const sarakkeet = rivit[i].split(',');
-    const tr = document.createElement('tr');
-
-    const tuntiTd = document.createElement('td');
-    tuntiTd.textContent = sarakkeet[0];
-    tuntiTd.className = 'tunti-solu';
-    tr.appendChild(tuntiTd);
-
-    for (let j = 1; j < sarakkeet.length; j++) {
-      const td = document.createElement('td');
-      td.className = 'minuutti-solu';
-      td.textContent = sarakkeet[j];
-      tr.appendChild(td);
-    }
-
-    tbody.appendChild(tr);
-  }
-
-  taulukko.appendChild(tbody);
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  lataaAikataulu('aikataulu_mape.csv', 'arkipaivat-table');
-  lataaAikataulu('aikataulu_la.csv', 'lauantai-table');
-  lataaAikataulu('aikataulu_su.csv', 'sunnuntai-table');
-});
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
