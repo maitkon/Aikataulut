@@ -15,6 +15,37 @@ body {
   padding: 20px;
   background-color: var(--gray-bg);
 }
+/* Pysäkkilistan perusulkoasu */
+#pysakki-lista {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Pysäkkilistan tekstin tyyli */
+#pysakki-lista p {
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+    color: #333333;
+}
+
+/* Poikkeustiedot-osion otsikko */
+.poikkeustiedot h4 {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Poikkeustiedot-osion tausta */
+.poikkeustiedot {
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
 
 /* ------------------------------
    Otsikkopalkki
