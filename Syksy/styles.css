@@ -32,6 +32,22 @@ body {
   padding: 20px;
   background-color: var(--gray-bg);
 }
+/* Estä taulukon katkeaminen sivujen välillä */
+table, thead, tbody, tr, td, th {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+}
+
+/* Estä .paiva-osio lohkon katkeaminen */
+.paiva-osio {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+}
+
+/* Estä otsikoiden katkeaminen */
+h2, h3, h4 {
+    page-break-after: avoid !important;
+}
 /* Pysäkkilistan perusulkoasu */
 #pysakki-lista {
     background: #ffffff;
