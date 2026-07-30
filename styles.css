@@ -73,3 +73,120 @@ table {
 
 th, td {
   padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  font-weight: bold;
+}
+
+/* Vuorotteluvärit */
+tbody tr:nth-child(odd) td.minuutti-solu {
+  background-color: #FFFFFF;
+}
+
+tbody tr:nth-child(even) td.minuutti-solu {
+  background-color: #D2F0FF;
+}
+
+/* ------------------------------
+   Taulukon solut
+--------------------------------*/
+td.tunti-solu {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  font-weight: bold;
+  width: 15%;
+  border-bottom: 3px solid var(--white);
+}
+
+td.minuutti-solu {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+/* ------------------------------
+   P-laatikko
+--------------------------------*/
+.p-laatikko {
+  display: inline-block;
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid #ffffff;
+  padding: 2px 6px;
+  font-weight: bold;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+/* ------------------------------
+   Seliteteksti
+--------------------------------*/
+.seliteteksti {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #000000;
+  background-color: #ffffff;
+  padding: 5px 0;
+  text-align: left;
+}
+
+/* ------------------------------
+   Layout-kontit
+--------------------------------*/
+.aikataulu-kontti {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.paiva-osio {
+  margin-bottom: 24px;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+/* ------------------------------
+   Pysäkkilista
+--------------------------------*/
+#pysakki-lista {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+#pysakki-lista h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+#pysakki-lista p {
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+    color: #333333;
+}
+
+/* ------------------------------
+   Poikkeustiedot
+--------------------------------*/
+.poikkeustiedot {
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+
+.poikkeustiedot h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
