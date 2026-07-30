@@ -14,6 +14,22 @@ body {
   padding: 20px;
   background-color: var(--gray-bg);
 }
+.paiva-osio {
+    page-break-before: always !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+}
+.poikkeustiedot {
+    page-break-before: always !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+}
+
+#pysakki-lista {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+}
+
 #pysakki-lista {
     page-break-before: always;
 }
