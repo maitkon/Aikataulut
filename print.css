@@ -36,7 +36,8 @@ table, thead, tbody, tr, td, th {
    Päiväosiot: aloita uusi sivu
 --------------------------------*/
 .paiva-osio {
-    page-break-before: avoid !important;
+    page-break-before: auto !important;
+    page-break-inside: avoid !important;
 }
 
 /* ------------------------------
