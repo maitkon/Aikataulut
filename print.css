@@ -44,17 +44,18 @@ table, thead, tbody, tr, td, th {
 --------------------------------*/
 .poikkeustiedot,
 #pysakki-lista {
-    page-break-before: always !important;
+    page-break-inside: avoid !important;
 }
 
 /* ------------------------------
    Otsikkopalkki tulostuksessa
 --------------------------------*/
 .linja-otsikko {
-    background-color: #000 !important;
-    color: #fff !important;
-    page-break-after: avoid !important;
+    background-color: var(--dark-blue) !important;
+    color: var(--white) !important;
+    page-break-inside: avoid !important;
 }
+
 
 /* ------------------------------
    Fonttikoot tulostukseen
