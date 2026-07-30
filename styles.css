@@ -1,3 +1,21 @@
+
+/* ------------------------------
+   Värit ja perusasetukset
+--------------------------------*/
+:root {
+  --dark-blue: #015CAD;
+  --white: #ffffff;
+  --black: #000000;
+  --gray-bg: #f4f4f4;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: var(--gray-bg);
+}
+
 /* ------------------------------
    Värit ja perusasetukset
 --------------------------------*/
@@ -14,28 +32,55 @@ body {
   padding: 20px;
   background-color: var(--gray-bg);
 }
-
-/* ------------------------------
-   Print-painikkeet
---------------------------------*/
-.print-buttons {
-    margin-bottom: 20px;
-    text-align: center;
+/* Estä taulukon katkeaminen sivujen välillä */
+table, thead, tbody, tr, td, th {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
 }
 
-.print-buttons button {
-    background-color: var(--dark-blue);
-    color: var(--white);
-    border: none;
-    padding: 10px 18px;
-    margin: 5px;
-    border-radius: 6px;
+/* Estä .paiva-osio lohkon katkeaminen */
+.paiva-osio {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+}
+
+/* Estä otsikoiden katkeaminen */
+h2, h3, h4 {
+    page-break-after: avoid !important;
+}
+/* Pysäkkilistan perusulkoasu */
+#pysakki-lista {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 1px solid #e0e0e0;
+}
+#pysakki-lista {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Pysäkkilistan tekstin tyyli */
+#pysakki-lista p {
     font-size: 15px;
-    cursor: pointer;
+    line-height: 1.7;
+    margin: 0;
+    color: #333333;
 }
 
-.print-buttons button:hover {
-    background-color: #014a8a;
+/* Poikkeustiedot-osion otsikko */
+.poikkeustiedot h4 {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Poikkeustiedot-osion tausta */
+.poikkeustiedot {
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
 }
 
 /* ------------------------------
@@ -48,6 +93,22 @@ body {
   text-align: center;
   border-radius: 8px;
   margin-bottom: 30px;
+}
+
+/* ------------------------------
+   Taulukon solut
+--------------------------------*/
+td.tunti-solu {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  font-weight: bold;
+  width: 15%;
+  border-bottom: 3px solid var(--white);
+}
+
+td.minuutti-solu {
+  background-color: var(--white);
+  color: var(--black);
 }
 
 /* ------------------------------
@@ -83,29 +144,13 @@ th {
   font-weight: bold;
 }
 
-/* Vuorotteluvärit */
+/* Vuorotellen valkoinen ja Very Light Green Blue */
 tbody tr:nth-child(odd) td.minuutti-solu {
   background-color: #FFFFFF;
 }
 
 tbody tr:nth-child(even) td.minuutti-solu {
   background-color: #D2F0FF;
-}
-
-/* ------------------------------
-   Taulukon solut
---------------------------------*/
-td.tunti-solu {
-  background-color: var(--dark-blue);
-  color: var(--white);
-  font-weight: bold;
-  width: 15%;
-  border-bottom: 3px solid var(--white);
-}
-
-td.minuutti-solu {
-  background-color: var(--white);
-  color: var(--black);
 }
 
 /* ------------------------------
@@ -151,42 +196,113 @@ td.minuutti-solu {
 }
 
 /* ------------------------------
-   Pysäkkilista
+   Otsikkopalkki
 --------------------------------*/
-#pysakki-lista {
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 20px;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-}
-
-#pysakki-lista h4 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-#pysakki-lista p {
-    font-size: 15px;
-    line-height: 1.7;
-    margin: 0;
-    color: #333333;
+.linja-otsikko {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 30px;
 }
 
 /* ------------------------------
-   Poikkeustiedot
+   Taulukon solut
 --------------------------------*/
-.poikkeustiedot {
-    background: #f7f7f7;
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: 30px;
+td.tunti-solu {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  font-weight: bold;
+  width: 15%;
+  border-bottom: 3px solid var(--white);
 }
 
-.poikkeustiedot h4 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 10px;
+td.minuutti-solu {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+/* ------------------------------
+   Esikatselulaatikko
+--------------------------------*/
+.preview-box {
+  background: #fff;
+  padding: 10px;
+  border-left: 5px solid var(--dark-blue);
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* ------------------------------
+   Taulukon yleiset tyylit
+--------------------------------*/
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  font-weight: bold;
+}
+
+/* Vuorotellen valkoinen ja Very Light Green Blue */
+tbody tr:nth-child(odd) td.minuutti-solu {
+  background-color: #FFFFFF;
+}
+
+tbody tr:nth-child(even) td.minuutti-solu {
+  background-color: #D2F0FF;
+}
+
+/* ------------------------------
+   P-laatikko
+--------------------------------*/
+.p-laatikko {
+  display: inline-block;
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid #ffffff;
+  padding: 2px 6px;
+  font-weight: bold;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+/* ------------------------------
+   Seliteteksti
+--------------------------------*/
+.seliteteksti {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #000000;
+  background-color: #ffffff;
+  padding: 5px 0;
+  text-align: left;
+}
+
+/* ------------------------------
+   Layout-kontit
+--------------------------------*/
+.aikataulu-kontti {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.paiva-osio {
+  margin-bottom: 24px;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 12px;
 }
