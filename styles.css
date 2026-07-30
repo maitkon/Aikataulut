@@ -14,6 +14,10 @@ body {
   padding: 20px;
   background-color: var(--gray-bg);
 }
+#pysakki-lista {
+    page-break-before: always;
+}
+
 /* Estä pysäkkilistan katkeaminen sivujen välillä */
 #pysakki-lista {
     page-break-inside: avoid !important;
