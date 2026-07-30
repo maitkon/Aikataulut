@@ -1,1 +1,68 @@
 
+/* ------------------------------
+   A4-sivun asetukset
+--------------------------------*/
+@page {
+    size: A4 portrait;
+    margin: 10mm;
+}
+
+/* ------------------------------
+   Yleiset tulostusasetukset
+--------------------------------*/
+body {
+    background: none !important;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+/* Piilota navigaatio ja print-painikkeet tulostuksessa */
+nav,
+.print-buttons {
+    display: none !important;
+}
+
+/* ------------------------------
+   Taulukot: estä katkeaminen
+--------------------------------*/
+table, thead, tbody, tr, td, th {
+    page-break-inside: avoid !important;
+}
+
+/* ------------------------------
+   Päiväosiot: aloita uusi sivu
+--------------------------------*/
+.paiva-osio {
+    page-break-before: always !important;
+}
+
+/* ------------------------------
+   Poikkeustiedot + pysäkkilista
+--------------------------------*/
+.poikkeustiedot,
+#pysakki-lista {
+    page-break-before: always !important;
+}
+
+/* ------------------------------
+   Otsikkopalkki tulostuksessa
+--------------------------------*/
+.linja-otsikko {
+    background-color: #000 !important;
+    color: #fff !important;
+    page-break-after: avoid !important;
+}
+
+/* ------------------------------
+   Fonttikoot tulostukseen
+--------------------------------*/
+body, table, th, td {
+    font-size: 12pt;
+}
+
+th, td {
+    padding: 6px 8px;
+}
