@@ -1,94 +1,58 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Linja-aikataulu</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linja-aikataulu</title>
 
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="print.css" media="print">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="print.css" media="print">
 </head>
 
 <body>
 
-<!-- Tulostus- ja PDF-painikkeet -->
-<div class="print-buttons">
-    <button onclick="window.print()">Tulosta</button>
-    <button onclick="window.print()">PDF</button>
-</div>
-
-<!-- Otsikkopalkki -->
 <header class="linja-otsikko">
-  <h1>Linja 18 (4576) / Atala – Kaupin kampus</h1>
-  <p>Kesäaikataulu | Voimassa: 1.6.–4.8.2026</p>
+    <h1>Linja 18 / Atala - Kaupin kampus</h1>
+    <p>Kesä | Voimassa: 1.6.–4.8.2026</p>
 </header>
 
-<!-- Navigaatio -->
 <nav style="text-align:center; margin-bottom:20px;">
-  <a href="/Aikataulut/" style="margin-right:20px; font-weight:bold;">18 Kesä</a>
-  <a href="/Aikataulut/Syksy/" style="margin-right:20px; font-weight:bold;">18 Syksy</a>
-  <a href="/Aikataulut/Linja7/" style="margin-right:20px; font-weight:bold;">7 Syksy</a>
+    <a href="/Aikataulut/" style="margin-right:20px; font-weight:bold;">18 Kesä</a>
+    <a href="/Aikataulut/Syksy/" style="margin-right:20px; font-weight:bold;">18 Syksy</a>
+    <a href="/Aikataulut/Linja7/" style="margin-right:20px; font-weight:bold;">7 Syksy</a>
 </nav>
 
-<!-- Sisältökontti -->
 <main class="aikataulu-kontti">
 
-  <!-- Maanantai–Perjantai -->
-  <section class="paiva-osio">
-    <div class="print-block">
-      <h2>Maanantai – Perjantai</h2>
-      <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
-      <table id="arkipaivat-table"></table>
-    </div>
-  </section>
+    <section class="paiva-osio">
+        <h2>Maanantai - Perjantai</h2>
+        <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
+        <table id="arkipaivat-table"></table>
+    </section>
 
-  <!-- Lauantai -->
-  <section class="paiva-osio">
-    <div class="print-block">
-      <h2>Lauantai</h2>
-      <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
-      <table id="lauantai-table"></table>
-    </div>
-  </section>
+    <section class="paiva-osio">
+        <h2>Lauantai</h2>
+        <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
+        <table id="lauantai-table"></table>
+    </section>
 
-  <!-- Sunnuntai -->
-  <section class="paiva-osio">
-    <div class="print-block">
-      <h2>Sunnuntai</h2>
-      <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
-      <table id="sunnuntai-table"></table>
-    </div>
-  </section>
+    <section class="paiva-osio">
+        <h2>Sunnuntai</h2>
+        <div class="preview-box">Pikkupiiankatu (4579, Vyöhyke B)</div>
+        <table id="sunnuntai-table"></table>
+    </section>
 
-  <!-- Poikkeustiedot -->
-  <section class="poikkeustiedot">
-    <div class="print-block">
-      <h4>Poikkeustiedot</h4>
-      <p>Tällä linjalla saattaa esiintyä reittimuutoksia (2028–2032) raitioteiden rakentamisen vuoksi.</p>
-      <p>Mahdolliset muutokset voivat sisältää väliaikaisia kiertoreittejä tai pysäkkisiirtoja.</p>
-    </div>
-  </section>
+    <section class="poikkeustiedot">
+        <h3>Poikkeustiedot</h3>
+        <p>Tällä linjalla saattaa esiintyä reittimuutoksia (2028–2032) raitiotien rakentamisen vuoksi.</p>
+        <p>Mahdolliset muutokset voivat sisältää väliaikaisia kiertoreittejä tai pysäkkisiirtoja.</p>
 
-  <!-- Pysäkkilista -->
-  <section id="pysakki-lista">
-    <div class="print-block">
-      <h4>Nykyiset pysäkit linjalla 18</h4>
-      <p>
-        Atala (5249) | Ahkionkatu (5251) | Nikinväylä (5083) | Orimuspolku (5141) |
-        Leinolan koulu (4573) | Piettasenristi (4575) | Piettasenkatu (4577) |
-        Pikkupiiankatu (4579) | Mäentakusenkatu (4563) | Linnainmaa D (5081) |
-        Niihamankatu P (5119) | Alasjärvi (5117) | Tenniskeskus (5043) |
-        Ali-Huikkaantie (5041) | Kaupin kampus (5107)
-      </p>
-    </div>
-  </section>
+        <h4>Nykyiset pysäkit linjalla 18:</h4>
+        <div id="pysakki-lista"></div>
+    </section>
 
 </main>
 
-<!-- JavaScript -->
 <script src="script.js"></script>
-
 </body>
 </html>
